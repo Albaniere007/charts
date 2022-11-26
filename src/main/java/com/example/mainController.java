@@ -28,7 +28,7 @@ public class mainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            BorderPane.setCenter(buildBarChart());
+            BorderPane.setCenter(buildLineChart());
     }
 
 
@@ -38,6 +38,7 @@ public class mainController implements Initializable {
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Quantity sold");
         BarChart barChart = new BarChart<>(xAxis, yAxis);
+
 
         XYChart.Series data = new XYChart.Series();
         data.setName("Products sold");
@@ -89,6 +90,30 @@ public class mainController implements Initializable {
         return pieChart;
     }
 
+    private LineChart buildLineChart(){
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Product");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Quantity sold");
+
+
+        XYChart.Series series=new XYChart.Series<>();
+        series.setName("Sales");
+
+        series.getData().add(new XYChart.Data<>(1,23));
+        series.getData().add(new XYChart.Data<>(2,30));
+        series.getData().add(new XYChart.Data<>(3,13));
+        series.getData().add(new XYChart.Data<>(4,28));
+
+        LineChart lineChart=new LineChart<>(xAxis,yAxis);
+
+        lineChart.getData().add(series);
+
+
+
+        return lineChart;
+    }
+
     @FXML
     void handleBarChart(ActionEvent event) {
 
@@ -112,4 +137,7 @@ public class mainController implements Initializable {
             pc.getData().get(0).setPieValue(750);
         }
     }
+
+
+
 }
